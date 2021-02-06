@@ -16,7 +16,7 @@
   opacity: .5;
 }
 
-.photo-items__like-button:active, button:focus {
+.photo-items__like-button:active, .photo-items__like-button:focus {
   outline: none;
 }
 
