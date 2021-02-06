@@ -4,8 +4,6 @@
   font: inherit;
   color: inherit;
   background-color: transparent;
-  cursor: pointer;
-  transition: opacity 0.2s;
   width: 32px;
   height: 32px;
   position: absolute;
@@ -17,7 +15,7 @@
 
 .popup__close-button:before {
   content: "";
-  background-image: url(../../images/close-button.svg);
+  background-image: url(../../../images/close-button.svg);
   background-size: 32px 32px;
   width: 32px;
   height: 32px;

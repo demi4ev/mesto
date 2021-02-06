@@ -12,7 +12,6 @@
   font-size: 14px;
   line-height: 1.21;
   color: black;
-  font-family: inherit;
 }
 
 .popup__field:active, .popup__field:focus {
