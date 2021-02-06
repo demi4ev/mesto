@@ -1,0 +1,5 @@
+.photo-items__description {
+  display: flex;
+  padding: 25px 20px;
+  align-items: center;
+}
