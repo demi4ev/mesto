@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/script.js" defer></script>
 </head>
 
 <body class="default-back">
@@ -30,14 +31,8 @@
         </section>
 
         <section class="photo-items">
-          <article class="photo-items__post">
-            <img class="photo-items__image" src="./images/karelia_2x.jpg" alt="Озеро Онега">
-            <div class="photo-items__description">
-              <h2 class="photo-items__title">Озеро Онега</h2>
-              <button type="button" class="photo-items__like-button"></button>
-            </div>
-          </article>
-          <article class="photo-items__post">
+
+          <!-- <article class="photo-items__post">
             <img class="photo-items__image" src="./images/baikal_2x.jpg" alt="Озера Байкал">
             <div class="photo-items__description">
               <h2 class="photo-items__title">Озера Байкал</h2>
@@ -71,10 +66,11 @@
               <h2 class="photo-items__title">Алтай</h2>
               <button type="button" class="photo-items__like-button"></button>
             </div>
-          </article>
+          </article> -->
+
         </section>
 
-        <div class="popup ">
+        <div class="popup popup__profile-edit">
           <form class="popup__container" name="popup">
             <h2 class="popup__title">Редактировать профиль</h2>
             <div class="popup__form-fields">
@@ -82,6 +78,18 @@
               <input type="text" class="popup__field popup__field_type_description" name="description" placeholder="Род занятий">
             </div>
             <button class="popup__submit-button" type="submit">Сохранить</button>
+            <button class="popup__close-button" type="reset"></button>
+          </form>
+        </div>
+
+        <div class="popup popup__new-place">
+          <form class="popup__container" name="popup">
+            <h2 class="popup__title">Новое место</h2>
+            <div class="popup__form-fields">
+              <input type="text" class="popup__field popup__field_type_name" name="name" placeholder="Название">
+              <input type="text" class="popup__field popup__field_type_description" name="description" placeholder="Ссылка на картинку">
+            </div>
+            <button class="popup__submit-button" type="submit">Создать</button>
             <button class="popup__close-button" type="reset"></button>
           </form>
         </div>
@@ -94,7 +102,15 @@
 
     </div>
 
-    <script src="./scripts/script.js"></script>
+  <template id="photo-items-template">
+      <article class="photo-items__post">
+        <img class="photo-items__image" src="./images/karelia_2x.jpg" alt="Озеро Онега">
+        <div class="photo-items__description">
+          <h2 class="photo-items__title">Озеро Онега</h2>
+          <button type="button" class="photo-items__like-button"></button>
+        </div>
+      </article>
+  </template>
 
 </body>
 
