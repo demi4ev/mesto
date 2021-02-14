@@ -86,12 +86,20 @@
           <form class="popup__container" name="popup">
             <h2 class="popup__title">Новое место</h2>
             <div class="popup__form-fields">
-              <input type="text" class="popup__field popup__field_type_name" name="name" placeholder="Название">
-              <input type="text" class="popup__field popup__field_type_description" name="description" placeholder="Ссылка на картинку">
+              <input type="text" class="popup__field popup__field_type_title" name="name" placeholder="Название">
+              <input type="text" class="popup__field popup__field_type_link-image" name="description" placeholder="Ссылка на картинку">
             </div>
-            <button class="popup__submit-button" type="submit">Создать</button>
+            <button class="popup__create-button" type="submit">Создать</button>
             <button class="popup__close-button" type="reset"></button>
           </form>
+        </div>
+
+        <div class="popup popup__big-picture">
+          <div class="popup__container popup__container_img">
+            <img class="popup__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Кам">
+            <p class="popup__description">Новое место</p>
+            <button class="popup__close-button" type="reset"></button>
+          </div>
         </div>
 
       </main>
@@ -102,13 +110,13 @@
 
     </div>
 
-  <template id="photo-items-template">
-      <article class="photo-items__post">
-        <img class="photo-items__image" src="./images/karelia_2x.jpg" alt="Озеро Онега">
-        <div class="photo-items__description">
-          <h2 class="photo-items__title">Озеро Онега</h2>
-          <button type="button" class="photo-items__like-button"></button>
-        </div>
+  <template class="template">
+    <article class="photo-items__post">
+      <button class="photo-items__img-button"><img class="photo-items__image" src="${item.link}" alt="${item.name}"></button>
+      <div class="photo-items__description">
+        <h2 class="photo-items__title">${item.name}</h2>
+        <button type="button" class="photo-items__like-button"></button>
+      </div>
       </article>
   </template>
 

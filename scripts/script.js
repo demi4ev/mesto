@@ -1,16 +1,25 @@
-let formEdit = document.querySelector('.popup__profile-edit');
-let nameInput = document.querySelector('.popup__field_type_name');
-let jobInput = document.querySelector('.popup__field_type_description');
+const formEdit = document.querySelector('.popup__profile-edit');
+const nameInput = document.querySelector('.popup__field_type_name');
+const jobInput = document.querySelector('.popup__field_type_description');
 
-let formAdd = document.querySelector('.popup__new-place');
+const formAdd = document.querySelector('.popup__new-place');
+const createButton = document.querySelector('.popup__create-button');
+const titleInput = document.querySelector('.popup__field_type_title');
+const imgLinkInput = document.querySelector('.popup__field_type_link-image');
 
-let nameInfo = document.querySelector('.profile__title');
-let jobInfo = document.querySelector('.profile__subtitle');
+const popupBigPicture = document.querySelector('.popup__big-picture');
+const popupImg = document.querySelector('.popup__img');
+const popupDescription = document.querySelector('.popup__description');
 
-let edit = document.querySelector('.profile__edit-button');
-let close = document.querySelector('.popup__close-button');
+const nameInfo = document.querySelector('.profile__title');
+const jobInfo = document.querySelector('.profile__subtitle');
 
-let add = document.querySelector('.profile__add-button');
+const editButton = document.querySelector('.profile__edit-button');
+const close = document.querySelector('.popup__close-button');
+
+const addButton = document.querySelector('.profile__add-button');
+
+const imgButton = document.querySelector('.photo-items__img-button');
 
 
 const initialCards = [
@@ -40,28 +49,31 @@ const initialCards = [
   }
 ];
 
-const photoContainerEl = document.querySelector('.photo-items')
+const photoContainerEl = document.querySelector('.photo-items');
+const templateEl = document.querySelector('.template');
+
 
 function render() {
   const html = initialCards
-    .map(getItemHTML)
-    .join('')
-    photoContainerEl.insertAdjacentHTML("afterbegin", html)
+    .map(getItem)
+    photoContainerEl.append(...html);
 }
 
-function getItemHTML(item) {
-  return `<article class="photo-items__post">
-          <img class="photo-items__image" src="${item.link}" alt="${item.name}">
-          <div class="photo-items__description">
-            <h2 class="photo-items__title">${item.name}</h2>
-            <button type="button" class="photo-items__like-button"></button>
-          </div>
-          </article>`
+
+function getItem(item) {
+  const newItem = templateEl.content.cloneNode(true);
+
+  const headerEl = newItem.querySelector('.photo-items__title');
+  headerEl.textContent = item.name;
+
+  const imgEl = newItem.querySelector('.photo-items__image');
+  imgEl.src = item.link;
+  imgEl.alt = item.name;
+
+  return newItem;
 }
 
 render();
-
-
 
 function addInfo() {
   nameInfo.textContent = nameInput.value;
@@ -71,35 +83,71 @@ function addInfo() {
 function formSubmitHandler(evt) {
   evt.preventDefault();
   addInfo();
-  closePopup();
+  closePopupEdit();
 }
 
-function showPopup() {
+function showPopupEdit() {
   formEdit.classList.add('popup_opened');
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
 }
 
-function showPopup() {
+function showPopupAdd() {
   formAdd.classList.add('popup_opened');
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
 }
 
-function closePopup() {
+function addCard() {
+  const titleInfo = titleInput.value;
+  const imgLinkInfo = imgLinkInput.value;
+  const cardItem = getItem({name: titleInfo, link: imgLinkInfo});
+  photoContainerEl.prepend(cardItem);
+  titleInput.value = '';
+  imgLinkInput.value = '';
+}
+
+function formSubmitHandler2(evt) {
+  evt.preventDefault();
+  addCard();
+  closePopupAdd();
+}
+
+function showPopupImg() {
+  popupBigPicture.classList.add('popup_opened');
+  const imgEl = document.querySelector('.photo-items__image');
+  const titleEl = document.querySelector('.photo-items__title');
+  imgEl.src = popupImg.src;
+  titleEl.alt = popupImg.alt;
+  titleEl.value = popupDescription.textContent;
+}
+
+function closePopupEdit() {
   formEdit.classList.remove('popup_opened');
 }
 
-function closePopup() {
+function closePopupAdd() {
   formAdd.classList.remove('popup_opened');
 }
 
+function closePopupImg() {
+  popupBigPicture.classList.remove('popup_opened');
+}
 
-edit.addEventListener('click', showPopup);
-add.addEventListener('click', showPopup);
-close.addEventListener('click', closePopup);
+
+
+editButton.addEventListener('click', showPopupEdit);
+addButton.addEventListener('click', showPopupAdd);
+// imgButton.addEventListener('click', showPopupImg);
+
+// createButton.addEventListener('click', addCard);
+
+close.addEventListener('click', closePopupEdit);
+close.addEventListener('click', closePopupAdd);
+// close.addEventListener('click', closePopupImg);
 formEdit.addEventListener('submit', formSubmitHandler);
 
+formAdd.addEventListener('submit', formSubmitHandler2);
 
 
 
@@ -107,57 +155,21 @@ formEdit.addEventListener('submit', formSubmitHandler);
 
 
 
-// function addCards() {
-//   const html = initialCards
-//   .map(addEl)
-//   itemsTemplate.append(...html);
+
+
+
+
+
+
+// function getItem(item) {
+//   return `<article class="photo-items__post">
+//           <img class="photo-items__image" src="${item.link}" alt="${item.name}">
+//           <div class="photo-items__description">
+//             <h2 class="photo-items__title">${item.name}</h2>
+//             <button type="button" class="photo-items__like-button"></button>
+//           </div>
+//           </article>`
 // }
-
-// const templateElement = document.querySelector('#photo-items-template');
-
-// function addEl(item) {
-//   // const newElement = document.querySelector('#photo-items-template').content;
-//   const newElement = templateElement.content.cloneNode(true);
-//   const titleElement = newElement.querySelector('.photo-items__title');
-//   const imageElement = newElement.querySelector('.photo-items__image');
-//   titleElement.textContent = item.name;
-//   imageElement.src = item.link;
-//   imageElement.alt = item.name;
-//   return newElement;
-// }
-
-
-// function addEl(item) {
-//   const itemsTemplate = document.querySelector('#photo-items-template').content;
-//   const itemsElement = itemsTemplate.cloneNode(true);
-//   itemsElement.querySelector('.photo-items__image').textContent = itemsImage;
-//   itemsElement.querySelector('.photo-items__title').textContent = itemsTitle;
-//   photoItems.append(itemsElement);
-// }
-
-// addCards();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

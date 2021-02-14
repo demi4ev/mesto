@@ -9,7 +9,7 @@
   max-width: 358px;
   max-height: 100%;
   padding: 34px 36px 37px;
-  position:fixed;
+  position: fixed;
   left: 50%;
   top: 50%;
   -ms-transform: translate(-50%,-50%);
@@ -23,4 +23,13 @@
     max-width: 238px;
     padding: 25px 22px;
   }
+}
+
+.popup__container_img {
+  background: none;
+  max-width: 75vw;
+  max-height: 75vh;
+  padding: 0;
+  border-radius: 0;
+  width: fit-content;
 }

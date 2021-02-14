@@ -13,3 +13,13 @@
     padding: 36px 19px 0;
   }
 }
+
+.photo-items__img-button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
