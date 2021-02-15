@@ -95,11 +95,11 @@
         </div>
 
         <div class="popup popup__big-picture">
-          <div class="popup__container popup__container_img">
+          <figure class="popup__container popup__container_img">
             <img class="popup__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Кам">
-            <p class="popup__description">Новое место</p>
+            <figcaption class="popup__description">Новое место</figcaption>
             <button class="popup__close-button" type="reset"></button>
-          </div>
+          </figure>
         </div>
 
       </main>
@@ -112,7 +112,8 @@
 
   <template class="template">
     <article class="photo-items__post">
-      <button class="photo-items__img-button"><img class="photo-items__image" src="${item.link}" alt="${item.name}"></button>
+      <button type="button" class="photo-items__del-button"></button>
+      <button type="button" class="photo-items__img-button"><img class="photo-items__image" src="${item.link}" alt="${item.name}"></button>
       <div class="photo-items__description">
         <h2 class="photo-items__title">${item.name}</h2>
         <button type="button" class="photo-items__like-button"></button>
