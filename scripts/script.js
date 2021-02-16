@@ -1,8 +1,8 @@
-const formEdit = document.querySelector('.popup__profile-edit');
+const formEdit = document.querySelector('.popup_profile-edit');
 const nameInput = document.querySelector('.popup__field_type_name');
 const jobInput = document.querySelector('.popup__field_type_description');
 
-const formAdd = document.querySelector('.popup__new-place');
+const formAdd = document.querySelector('.popup_new-place');
 const createButton = document.querySelector('.popup__create-button');
 const titleInput = document.querySelector('.popup__field_type_title');
 const imgLinkInput = document.querySelector('.popup__field_type_link-image');
@@ -86,7 +86,7 @@ function getItem(item) {
   return newItem;
 }
 
-const popupBigPicture = document.querySelector('.popup__big-picture');
+const popupBigPicture = document.querySelector('.popup_big-picture');
 const popupImg = document.querySelector('.popup__img');
 const popupDescription = document.querySelector('.popup__description');
 const closeImg = popupBigPicture.querySelector('.popup__close-button');
