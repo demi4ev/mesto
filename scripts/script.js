@@ -7,8 +7,6 @@ const createButton = document.querySelector('.popup__create-button');
 const titleInput = document.querySelector('.popup__field_type_title');
 const imgLinkInput = document.querySelector('.popup__field_type_link-image');
 
-
-
 const nameInfo = document.querySelector('.profile__title');
 const jobInfo = document.querySelector('.profile__subtitle');
 
@@ -17,9 +15,6 @@ const closeEdit = formEdit.querySelector('.popup__close-button');
 
 const addButton = document.querySelector('.profile__add-button');
 const closeAdd = formAdd.querySelector('.popup__close-button');
-
-
-
 
 const initialCards = [
   {
@@ -48,6 +43,7 @@ const initialCards = [
   }
 ];
 
+
 const photoContainerEl = document.querySelector('.photo-items');
 const templateEl = document.querySelector('.template');
 
@@ -72,8 +68,20 @@ function getItem(item) {
   const delButton = newItem.querySelector('.photo-items__del-button');
   delButton.addEventListener('click', delCard);
 
+  newItem.querySelector('.photo-items__like-button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('photo-items__like-button_active');
+  });
+
   const imgButton = newItem.querySelector('.photo-items__img-button');
-  imgButton.addEventListener('click', showPopupImg);
+  newItem.querySelector('.photo-items__image').src = item.link;
+  newItem.querySelector('.photo-items__image').alt = item.name;
+  const popupDescription = document.querySelector('.popup__description');
+
+  imgButton.addEventListener('click', function() {
+    popupImg.src = item.link;
+    popupDescription.textContent = item.name;
+    showPopupImg(popupBigPicture);
+  });
 
   return newItem;
 }
@@ -85,18 +93,6 @@ const closeImg = popupBigPicture.querySelector('.popup__close-button');
 
 const imgEl = document.querySelector('.photo-items__image');
 const titleEl = document.querySelector('.photo-items__title');
-
-function showPopupImg() {
-  popupBigPicture.classList.add('popup_opened');
-  imgEl.src = popupImg.src;
-  titleEl.alt = popupImg.alt;
-  titleEl.textContent = popupDescription.textContent;
-}
-
-
-
-
-
 
 render();
 
@@ -121,6 +117,10 @@ function showPopupAdd() {
   formAdd.classList.add('popup_opened');
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
+}
+
+function showPopupImg() {
+  popupBigPicture.classList.add('popup_opened');
 }
 
 function addCard() {
