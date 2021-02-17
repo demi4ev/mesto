@@ -24,14 +24,11 @@ const popupImg = document.querySelector('.popup__img');
 const popupDescription = document.querySelector('.popup__description');
 const closeImg = popupBigPicture.querySelector('.popup__close-button');
 
-const imgEl = document.querySelector('.photo-items__image');
-const titleEl = document.querySelector('.photo-items__title');
-
 
 function render() {
-  const html = cardsElements
+  const cardsElements = initialCards
     .map(createCard)
-    photoContainerEl.append(...html);
+    photoContainerEl.append(...cardsElements);
 }
 
 
@@ -57,7 +54,7 @@ function createCard(item) {
   imgButton.addEventListener('click', function() {
     popupImg.src = item.link;
     popupDescription.textContent = item.name;
-    showPopupImg();
+    openPopup(popupBigPicture);
   });
 
   return newItem;
@@ -94,12 +91,6 @@ function showPopupEdit() {
 
 function showPopupAdd() {
   openPopup(formAdd);
-  nameInput.value = nameInfo.textContent;
-  jobInput.value = jobInfo.textContent;
-}
-
-function showPopupImg() {
-  popupBigPicture.classList.add('popup_opened');
 }
 
 function addCard() {
