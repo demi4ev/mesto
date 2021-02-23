@@ -71,6 +71,24 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+formAdd.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(formAdd);
+  }
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") {
+    closePopup(formAdd);
+  }
+})
+
+// formAdd.addEventListener('keydown', function (event) {
+//     if (evt.keyCode === 27) {
+//       console.log('kfkfkfk');
+//     };
+// });
+
 
 function addInfo() {
   nameInfo.textContent = nameInput.value;
