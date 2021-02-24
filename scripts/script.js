@@ -71,25 +71,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-formAdd.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(formAdd);
-  }
-});
-
-document.addEventListener('keydown', function(evt) {
-  if (evt.key === "Escape") {
-    closePopup(formAdd);
-  }
-})
-
-// formAdd.addEventListener('keydown', function (event) {
-//     if (evt.keyCode === 27) {
-//       console.log('kfkfkfk');
-//     };
-// });
-
-
 function addInfo() {
   nameInfo.textContent = nameInput.value;
   jobInfo.textContent = jobInput.value;
@@ -133,6 +114,78 @@ function delCard(event) {
 }
 
 
+// валидация1
+
+// const showError = (input) => {
+//   input.classList.add('.popup__field_type_error');
+// };
+
+// const hideError = (input) => {
+//   input.classList.remove('popup__field_type_error');
+// };
+
+// const checkInputValidity = () => {
+//   if (!nameInput.validity.valid) {
+//     showError(nameInput);
+//   }
+//   else {
+//     hideError(nameInput);
+//   }
+// };
+
+
+// валидация2
+
+const showError = (inputElement, errorMessage) => {
+  console.log(inputElement.name, errorMessage);
+};
+
+const hideError = (inputElement) => {
+
+};
+
+const checkInputValidity = (inputElement) => {
+  const isInputNotValid = !inputElement.validity.valid;
+  if (isInputNotValid) {
+    const errorMessage = inputElement.validationMessage;
+
+    showError(inputElement, errorMessage);
+  } else {
+    hideError(inputElement);
+  }
+
+}
+
+const setEventListeners = (formElement) => {
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault();
+  });
+
+  const inputList = Array.from(formElement.querySelectorAll('.popup__field'));
+
+  inputList.forEach(inputElement => {
+    inputElement.addEventListener('input', (event) => {
+      checkInputValidity(inputElement);
+    });
+  })
+}
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__container'));
+
+  formList.forEach(setEventListeners);
+
+};
+
+enableValidation();
+
+
+
+
+
+
+// закрытие попапов
+
 function closePopupEdit() {
   closePopup(formEdit);
 }
@@ -144,6 +197,44 @@ function closePopupAdd() {
 function closePopupImg() {
   closePopup(popupBigPicture);
 }
+
+
+// закрытие по esc и overlay
+
+formEdit.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(formEdit);
+  }
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") {
+    closePopup(formEdit);
+  }
+})
+
+formAdd.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(formAdd);
+  }
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") {
+    closePopup(formAdd);
+  }
+})
+popupBigPicture.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(popupBigPicture);
+  }
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") {
+    closePopup(popupBigPicture);
+  }
+})
 
 
 editButton.addEventListener('click', showPopupEdit);
