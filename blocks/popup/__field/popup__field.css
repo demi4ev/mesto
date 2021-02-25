@@ -21,12 +21,3 @@
 .popup__field::-moz-focus-inner {
   border: 0;
 }
-
-.popup__field_type_error {
-  border-bottom: 1px solid #FF0000;
-  opacity: 0;
-}
-
-.popup__field_type_error_active {
-  opacity: 1;
-}
