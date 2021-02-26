@@ -114,27 +114,7 @@ function delCard(event) {
 }
 
 
-// валидация1
-
-// const showError = (input) => {
-//   input.classList.add('.popup__field_type_error');
-// };
-
-// const hideError = (input) => {
-//   input.classList.remove('popup__field_type_error');
-// };
-
-// const checkInputValidity = () => {
-//   if (!nameInput.validity.valid) {
-//     showError(nameInput);
-//   }
-//   else {
-//     hideError(nameInput);
-//   }
-// };
-
-
-// валидация2
+// валидация
 
 const showError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -164,22 +144,19 @@ const checkInputValidity = (formElement, inputElement) => {
 
 }
 
-// кнопку неактивной
-// function hasInvalidInput (inputList) {
-//   return inputList.some((inputElement) => {
-//   return !inputElement.validity.valid;
-// });
-// }
 
-// function toggleButtonState(inputList, buttonElement) {
-//   if (hasInvalidInput(inputList)) {
-//     buttonElement.setAttribute("disabled", true);
-//     buttonElement.classList.add('popup__submit-button_inactive');
-//   } else {
-//     buttonElement.removeAttribute("disabled");
-//     buttonElement.classList.remove('popup__submit-button_inactive');
-// }
-// }
+// кнопку неактивной
+
+const toggleButtonState = (inputList, buttonElement) => {
+  const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
+  if (hasInvalidInput) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add('popup__submit-button_inactive');
+  } else {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove('popup__submit-button_inactive');
+  }
+}
 
 
 const setEventListeners = (formElement) => {
@@ -188,14 +165,14 @@ const setEventListeners = (formElement) => {
   });
 
   const inputList = Array.from(formElement.querySelectorAll('.popup__field'));
+  const buttonElement = formElement.querySelector('.popup__submit-button');
 
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', (event) => {
       checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
-  // const buttonElement = formElement.querySelector('.popup__create-button');
-  // toggleButtonState(inputList, buttonElement);
 }
 
 const enableValidation = () => {
@@ -206,10 +183,6 @@ const enableValidation = () => {
 };
 
 enableValidation();
-
-
-
-
 
 
 // закрытие попапов
