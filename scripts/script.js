@@ -25,7 +25,7 @@ const closeImg = popupBigPicture.querySelector('.popup__close-button');
 
 const ESC_CODE = "Escape";
 
-const submitButton = formAdd.querySelector('.popup__submit-button');
+const submitButton = formAdd.querySelector('.popup__create-button');
 
 
 function render() {
@@ -84,7 +84,7 @@ function addInfo() {
 function handleUserInfoSubmit(evt) {
   evt.preventDefault();
   addInfo();
-  closePopupEdit();
+  closePopup(formEdit);
 }
 
 function showPopupEdit() {
