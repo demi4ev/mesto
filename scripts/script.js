@@ -154,6 +154,7 @@ document.addEventListener('keydown', function(evt) {
     closePopup(formAdd);
   }
 })
+
 popupBigPicture.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
     closePopup(popupBigPicture);

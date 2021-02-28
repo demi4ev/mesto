@@ -30,7 +30,7 @@
   border: 0;
 }
 
-.popup__submit-button_inactive {
+.popup__submit-button:disabled {
   border: 1px solid black;
   background-color: transparent;
   opacity: .2;
@@ -41,3 +41,16 @@
   user-select: none;
   pointer-events: none;
 }
+
+
+/* .popup__submit-button_inactive {
+  border: 1px solid black;
+  background-color: transparent;
+  opacity: .2;
+  color: black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+} */
