@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./scripts/initial-сards.js"></script>
-  <script src="./scripts/script.js" defer></script>
-  <script src="./scripts/validate.js" defer></script>
 </head>
 
 <body class="default-back">
@@ -37,7 +34,7 @@
         </section>
 
         <div class="popup popup_profile-edit">
-          <form class="popup__container" name="popup" novalidate>
+          <form class="popup__container" name="popup_profile-edit" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__form-fields">
               <label class="popup__label">
@@ -57,7 +54,7 @@
         </div>
 
         <div class="popup popup_new-place">
-          <form class="popup__container" name="popup" novalidate>
+          <form class="popup__container" name="popup_new-place" novalidate>
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__form-fields">
               <label class="popup__label">
@@ -102,6 +99,10 @@
       </div>
       </article>
   </template>
+
+  <script src="./scripts/initial-сards.js"></script>
+  <script src="./scripts/script.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 
 </body>
 
