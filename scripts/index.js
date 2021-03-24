@@ -1,4 +1,5 @@
-import {Card} from './Сard.js'
+import { Card } from './Сard.js'
+import { FormValidator } from './FormValidator.js'
 
 const formEdit = document.querySelector('.popup_profile-edit');
 const nameInput = document.querySelector('.popup__field_type_name');
