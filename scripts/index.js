@@ -118,27 +118,11 @@ function addCard() {
   submitButton.setAttribute('disabled', true);
 }
 
-// function addCard() {
-//   const titleInfo = titleInput.value;
-//   const imgLinkInfo = imgLinkInput.value;
-//   const cardItem = createCard({name: titleInfo, link: imgLinkInfo});
-//   photoContainerEl.prepend(cardItem);
-//   titleInput.value = '';
-//   imgLinkInput.value = '';
-//   submitButton.setAttribute('disabled', true);
-// }
-
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   addCard();
   closePopup(formAdd);
 }
-
-// function delCard(event) {
-//   const targetEl = event.target;
-//   const targetCard = targetEl.closest('.photo-items__post');
-//   targetCard.remove();
-// }
 
 
 // закрытие по overlay
