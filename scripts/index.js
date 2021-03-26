@@ -162,6 +162,23 @@ function closeByEsc(evt) {
 };
 
 
+const validationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit-button',
+  inputErrorClass: 'popup__field_error',
+  formError: '.popup__form-error',
+  formErrorActive: 'popup__form-error_active',
+  formLabel: '.popup__label'
+}
+
+const editFormValidator = new FormValidator(validationConfig, formEdit);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(validationConfig, formAdd);
+addFormValidator.enableValidation();
+
+
 editButton.addEventListener('click', showPopupEdit);
 addButton.addEventListener('click', () => { openPopup(formAdd); });
 closeEdit.addEventListener('click', () => { closePopup(formEdit); });

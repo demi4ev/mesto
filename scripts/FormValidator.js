@@ -1,7 +1,7 @@
 // валидация
 
 export class FormValidator {
-  constructor({ config, formElement }) {
+  constructor(config, formElement) {
     this._formElement = formElement;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -10,7 +10,7 @@ export class FormValidator {
     this._formErrorActive = config.formErrorActive;
     this._formLabel = config.formLabel;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._formElement.querySelector(submitButtonSelector);
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
 
@@ -35,11 +35,23 @@ export class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
   };
 
+
+
   _setEventListeners = (formElement, inputSelector, submitButtonSelector, inputErrorClass, formErrorActive, formLabel, formError) => {
     const handleFormSubmit = (event) => {
       event.preventDefault();
     };
     this._formElement.addEventListener('submit', handleFormSubmit);
+
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input',() => {
+        this._formValidation (inputElement)
+        this._toggleButtonState()
+      })
+    })
+
+
+
 
     const inputListIterator = (inputElement) => {
       const handleInput = () => {
@@ -77,14 +89,14 @@ export class FormValidator {
     }
   }
 
-  const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inputErrorClass, formErrorActive, formLabel, formError }) => {
-    const formElements = document.querySelectorAll(formSelector);
-    const formList = Array.from(formElements);
+  // const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inputErrorClass, formErrorActive, formLabel, formError }) => {
+  //   const formElements = document.querySelectorAll(formSelector);
+  //   const formList = Array.from(formElements);
 
-    formList.forEach((formElement) => {
-      setEventListeners(formElement, inputSelector, submitButtonSelector, inputErrorClass, formErrorActive, formLabel, formError);
-    });
-  };
+  //   formList.forEach((formElement) => {
+  //     setEventListeners(formElement, inputSelector, submitButtonSelector, inputErrorClass, formErrorActive, formLabel, formError);
+  //   });
+  // };
 
   enableValidation () {
     this._formElement.addEventListener('submit', (event) => {
@@ -173,12 +185,14 @@ export class FormValidator {
 //   });
 // };
 
-enableValidation({
-  formSelector: '.popup__container',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit-button',
-  inputErrorClass: 'popup__field_error',
-  formError: '.popup__form-error',
-  formErrorActive: 'popup__form-error_active',
-  formLabel: '.popup__label'
-});
+// enableValidation({
+//   formSelector: '.popup__container',
+//   inputSelector: '.popup__field',
+//   submitButtonSelector: '.popup__submit-button',
+//   inputErrorClass: 'popup__field_error',
+//   formError: '.popup__form-error',
+//   formErrorActive: 'popup__form-error_active',
+//   formLabel: '.popup__label'
+// });
+
+
