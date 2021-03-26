@@ -1,4 +1,4 @@
-# Проект 6: Место
+# Проект 7: Место
 
 https://ilya-mischenko.github.io/mesto/
 
@@ -8,4 +8,4 @@ https://ilya-mischenko.github.io/mesto/
 
 ### Технологии
 
-Адаптивная вёрстка с помощью grid, валидация на Java Script.
+Адаптивная вёрстка с помощью grid, валидация на Java Script. Организация кода с помощью классов.
