@@ -80,7 +80,7 @@ function closePopup(popup) {
 // закрытие по esc
 
 function closeByEsc(evt) {
-  if (event.key === ESC_CODE) {
+  if (evt.key === ESC_CODE) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
