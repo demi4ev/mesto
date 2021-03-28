@@ -47,7 +47,6 @@ function createUserCard(item) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc);
-  addFormValidator.clearErrors();
 }
 
 
@@ -147,7 +146,7 @@ addFormValidator.enableValidation();
 
 
 editButton.addEventListener('click', showPopupEdit);
-addButton.addEventListener('click', () => { openPopup(formAdd); });
+addButton.addEventListener('click', () => { openPopup(formAdd); addFormValidator.clearErrors();});
 closeEdit.addEventListener('click', () => { closePopup(formEdit); });
 closeAdd.addEventListener('click', () => { closePopup(formAdd); });
 closeImg.addEventListener('click', () => { closePopup(popupBigPicture); });

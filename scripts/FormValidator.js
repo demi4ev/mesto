@@ -14,11 +14,36 @@ export class FormValidator {
   }
 
 
+  // // показываем ошибку
+
+  // _showError () {
+  //   // const formSectionElement = this._inputElement.closest(this._formLabel);
+  //   // this._errorElement = formSectionElement.querySelector(this._formError);
+  //   this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  //   this._errorElement.textContent = this._inputElement.validationMessage;
+  //   this._errorElement.classList.add(this._formErrorActive);
+  //   this._inputElement.classList.add(this._inputErrorClass);
+  // }
+
+
+  // // скрываем ошибку
+
+  // _hideError (inputElement) {
+  //   // const formSectionElement = this._inputElement.closest(this._formLabel);
+  //   // this._errorElement = formSectionElement.querySelector(this._formError);
+  //   this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  //   this._errorElement.textContent = '';
+  //   this._errorElement.classList.remove(this._formErrorActive);
+  //   this._inputElement.classList.remove(this._inputErrorClass);
+  // }
+
+
   // показываем ошибку
 
   _showError () {
     const formSectionElement = this._inputElement.closest(this._formLabel);
     this._errorElement = formSectionElement.querySelector(this._formError);
+    // this._errorElement = this._formElement.querySelector(`#${this._inputElement.id}-error`);
     this._errorElement.textContent = this._inputElement.validationMessage;
     this._errorElement.classList.add(this._formErrorActive);
     this._inputElement.classList.add(this._inputErrorClass);
@@ -30,10 +55,32 @@ export class FormValidator {
   _hideError () {
     const formSectionElement = this._inputElement.closest(this._formLabel);
     this._errorElement = formSectionElement.querySelector(this._formError);
-    this._errorElement.textContent = "";
+    // this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    this._errorElement.textContent = '';
     this._errorElement.classList.remove(this._formErrorActive);
     this._inputElement.classList.remove(this._inputErrorClass);
   };
+
+
+  // очищаем все ошибки
+
+  _hideAllErrors (inputElement) {
+    this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    this._errorElement.textContent = '';
+    inputElement.classList.remove(this._inputErrorClass);
+    this._errorElement.classList.remove(this._formErrorActive);
+  }
+
+  // _hideAllErrors (inputElement) {
+  //   // this._errorElement = this._formElement.querySelectorAll(`.${inputElement.id}-error`);
+  //   // const formSectionElement = this._formElement.querySelectorAll(`.${inputElement.id}-error`);
+  //   this._errorElement = this._formElement.querySelector(this._formError);
+  //   // this._errorElements = Array.from(this._formElement.querySelectorAll(this._formError));
+  //   // this._errorElement = this._formElement.querySelectorAll(this._formError);
+  //   this._errorElement.textContent = '';
+  //   inputElement.classList.remove(this._inputErrorClass);
+  //   this._errorElement.classList.remove(this._formErrorActive);
+  // }
 
   // _showError () {
   //   this._inputElement.classList.add(this._inputErrorClass);
@@ -42,11 +89,10 @@ export class FormValidator {
   // }
 
   // _hideError (inputElement) {
-  //   this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-  //   // this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  //   this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
   //   inputElement.classList.remove(this._inputErrorClass);
   //   this._errorElement.classList.remove(this._formErrorActive);
-  //   this._errorElement.textContent = "";
+  //   this._errorElement.textContent = '';
   // }
 
 
@@ -64,11 +110,12 @@ export class FormValidator {
 
   _checkInputValidity (inputElement) {
     this._inputElement = inputElement;
+    // this._errorElement = this._formElement.querySelector(`#${this._inputElement.id}-error`);
     if (!this._inputElement.validity.valid) {
       this._errorMessage = inputElement.validationMessage;
       this._showError();
     } else {
-      this._hideError();
+      this._hideError(inputElement);
     }
   }
 
@@ -104,7 +151,7 @@ export class FormValidator {
 
   clearErrors () {
     this._inputList.forEach((formElement) => {
-      this._hideError (formElement)
+      this._hideAllErrors (formElement)
     });
     this._toggleButtonState()
   }
