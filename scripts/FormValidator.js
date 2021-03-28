@@ -35,6 +35,22 @@ export class FormValidator {
     this._inputElement.classList.remove(this._inputErrorClass);
   };
 
+  // _showError () {
+  //   this._inputElement.classList.add(this._inputErrorClass);
+  //   this._errorElement.classList.add(this._formErrorActive);
+  //   this._errorElement.textContent = this._inputElement.validationMessage;
+  // }
+
+  // _hideError (inputElement) {
+  //   this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+  //   // this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  //   inputElement.classList.remove(this._inputErrorClass);
+  //   this._errorElement.classList.remove(this._formErrorActive);
+  //   this._errorElement.textContent = "";
+  // }
+
+
+
 
   _setEventListeners () {
     this._inputList.forEach((inputElement) => {
@@ -81,5 +97,15 @@ export class FormValidator {
       this._toggleButtonState();
     })
     this._setEventListeners();
+  }
+
+
+  // очистка ошибок
+
+  clearErrors () {
+    this._inputList.forEach((formElement) => {
+      this._hideError (formElement)
+    });
+    this._toggleButtonState()
   }
 }
