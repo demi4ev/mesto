@@ -45,8 +45,8 @@ import {
 
 
 
-const popupOpenImage = new PopupWithImage({ popupSelector: '.popup__img' });
-popupOpenImage.setEventListeners();
+const popupWithImage = new PopupWithImage({ popupSelector: '.popup__img' });
+popupWithImage.setEventListeners();
 
 function createUserCard(item) {
   const newCard = new Card(item, cardTemplate, {
@@ -224,84 +224,7 @@ addFormValidator.enableValidation();
 
 
 
-// const popupEdit = new PopupWithForm(formEdit, (inputValues) => {
-//   userInfo.setUserInfo(inputValues);
-// });
-// popupEdit.setEventListeners();
 
-
-
-// const popupWithImage = new PopupWithImage(popupBigPicture, popupImg, popupDescription)
-// popupWithImage.setEventListeners()
-
-
-// const popupOpenImage = new PopupWithImage({ popupSelector:'.popup_big-picture' })
-// popupOpenImage.setEventListeners()
-
-
-
-// function createUserCard(item) {
-//   const card = new Card(item, '.template', {
-//     handleCardClick: (name, link) => {
-//       popupWithImage.open(name, link)
-//     }
-//   });
-//   const newCard = card.createCard();
-//   return newCard;
-// }
-
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = createUserCard(item)
-//     cardList.addItem(card);
-//   }
-
-// }, photoContainerEl);
-// cardList.renderItems();
-
-
-
-
-// const cardList = new Section({items: initialCards, renderer: (item) => {
-//   const card = new Card(item, '.template', () => {
-//     popupOpenImage.open(item.name, item.link)});
-//   const cardElement = card.createCard();
-//   cardList.addItem(cardElement);
-// }}, '.photo-items')
-
-// cardList.renderItems();
-
-
-
-
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: (cardItem) => {
-//     const newCard = new createUserCard(cardItem);
-//     cardList.addItem(newCard);
-//   }
-// },
-// photoContainerEl);
-// cardList.renderItems();
-
-
-
-// function createUserCard(item) {
-//   const card = new Card(item, '.template');
-//   const newCard = card.createCard();
-//   return newCard;
-// };
-
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: (cardItem) => {
-//     const newCard = new createUserCard(cardItem);
-//     cardList.addItem(newCard);
-//   }
-// },
-// photoContainerEl);
-// cardList.renderItems();
 
 
 // открытие попапа
