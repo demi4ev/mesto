@@ -41,7 +41,6 @@ export default class Card {
     })
     this._delButton.addEventListener('click', this._delCard)
     this._likeButton.addEventListener('click', this._likeCard)
-    this._newItem.querySelector('.photo-items__img-button').addEventListener('click', this._openImage)
     this._imgButton.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     })
@@ -54,6 +53,7 @@ export default class Card {
   _likeCard = () => {
     this._newItem.querySelector('.photo-items__like-button').classList.toggle('photo-items__like-button_active')
   }
+
 
   // _openImage = () => {
   //   popupImg.src = this._link;
