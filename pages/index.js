@@ -45,7 +45,7 @@ import {
 
 
 
-const popupWithImage = new PopupWithImage({ popupSelector: '.popup__img' });
+const popupWithImage = new PopupWithImage('.popup__img');
 popupWithImage.setEventListeners();
 
 function createUserCard(item) {
