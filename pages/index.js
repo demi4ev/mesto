@@ -31,45 +31,31 @@ import {
 
 
 
-// рендерим карточки
+// рендер карточек
 
-// initialCards.forEach((item) => {
-//   photoContainerEl.prepend(createUserCard(item));
-// });
-
-// function createUserCard(item) {
-//   const card = new Card(item, '.template');
-//   const newCard = card.createCard();
-//   return newCard;
-// };
-
-
-
-const popupWithImage = new PopupWithImage('.popup__img');
+const popupWithImage = new PopupWithImage('.popup_big-picture');
 popupWithImage.setEventListeners();
 
-function createUserCard(item) {
-  const newCard = new Card(item, cardTemplate, {
-    handleCardClick: (name, link) => {
-      popupWithImage.open(name, link)
-    }
-  })
+// function createUserCard(item, cardSelector) {
+//   const newCard = new Card(item, cardSelector, popupWithImage.open.bind(popupWithImage));
+//   return newCard.createCard();
+// }
 
-  const newUserCard = newCard.createCard();
-  console.log(item)
-  return newUserCard;
+function createUserCard(item, cardSelector) {
+  const newCard = new Card(item, cardSelector, () => {
+    popupWithImage.open(item.name, item.link)});
+  return newCard.createCard();
 }
 
-const cardList = new Section({
+const cardsList = new Section({
   items: initialCards,
-  renderer: (cardItem) => {
-    const newCard = createUserCard(cardItem)
-    cardList.addItem(newCard);
+  renderer: item => {
+    const makeCard = createUserCard(item, '.template');
+    cardsList.addItem(makeCard, true);
   }
+},'.photo-items');
 
-}, photoContainerEl);
-cardList.renderItems();
-
+cardsList.renderItems();
 
 
 
@@ -90,29 +76,64 @@ cardList.renderItems();
 
 // попап редактирование профиля
 
-const newUser = new UserInfo({ profileName:'.profile__title', profileDescription: '.profile__subtitle' });
+const userInfo = new UserInfo({ profileName:'.profile__title', profileDescription: '.profile__subtitle'});
 
-const popupEdit = new PopupWithForm({ formEdit, handleSubmitForm: (values) => {
-  newUser.setUserInfo({ name:values.Author, job:values.Profile })
-}
+const popupEdit = new PopupWithForm({ popupSelector:'.popup_profile-edit', handleSubmitForm: (values) => {
+  userInfo.setUserInfo({ name:values.Author, job: values.Profile })
+  }
 });
 popupEdit.setEventListeners();
 
 
-const userInfo = new UserInfo(profileSelectorData)
-
 editButton.addEventListener('click', () => {
-  console.log('click');
   popupEdit.open();
-  const newInfo = userInfo.getUserInfo();
-  nameInput.value = newInfo.name;
-  jobInput.value = newInfo.description;
+  const newUser = userInfo.getUserInfo()
+  nameInput.value = newUser.name;
+  jobInput.value = newUser.description;
   editFormValidator.clearErrors();
-})
+});
+
+
+
+
+
+
+// const newUser = new UserInfo({ profileName:'.profile__title', profileDescription: '.profile__subtitle' });
+
+// const popupEdit = new PopupWithForm({ formEdit, handleSubmitForm: (values) => {
+//   newUser.setUserInfo({ name:values.Author, job:values.Profile })
+// }
+// });
+// popupEdit.setEventListeners();
+
+
+
+
 
 
 
 // отправка попапа добавления карточки
+
+const popupAddCard = new PopupWithForm({ popupSelector:'.popup_new-place', handleSubmitForm: () => {
+  const addInputValues = popupAddCard._getInputValues();
+  const newCardDataSet = {
+    name: addInputValues.Name,
+    link: addInputValues.Link
+  }
+  const card = new Card(newCardDataSet,'.template', () => {
+    popupWithImage.open(item.name, item.link)});
+  const cardElement = card.createCard();
+  photoContainerEl.prepend(cardElement);
+  popupAddCard.close();}
+});
+popupAddCard.setEventListeners();
+addButton.addEventListener('click', () => {
+  popupAddCard.open();
+  addFormValidator.clearErrors();
+});
+
+
+
 
 // function handleAddCardSubmit(evt) {
 //   evt.preventDefault();
@@ -124,30 +145,11 @@ editButton.addEventListener('click', () => {
 // }
 
 
-// const popupAddCard = new PopupWithForm({popupSelector:'.popup_new-place', handleSubmitForm: () => {
-//   const addInputValues = popupAddCard._getInputValues();
-//   const newCardDataSet = {
-//     name: addInputValues.Name,
-//     link: addInputValues.Link
-//   }
 
-//   const card = new Card(newCardDataSet,templateEl, () => {
-//     popupOpenImage.open(item.name, item.link)
-//   });
-
-//   const cardElement = card.createCard();
-//   photoContainerEl.prepend(cardElement);
-//   popupAddCard.close();
-// }
+// addButton.addEventListener('click', () => {
+//   popupAddCard.open();
+//   addFormValidator.clearErrors();
 // });
-// popupAddCard.setEventListeners();
-
-
-
-addButton.addEventListener('click', () => {
-  popupAddCard.open();
-  addFormValidator.clearErrors();
-});
 
 
 // addButton.addEventListener('click', () => { openPopup(formAdd); addFormValidator.clearErrors();});
