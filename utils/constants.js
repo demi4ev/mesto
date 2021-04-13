@@ -75,11 +75,5 @@ export {
   popupDescription,
   closeImg,
   ESC_CODE,
-  submitButton,
-  profileSelectorData
+  submitButton
 };
-
-const profileSelectorData = {
-  profileName: '.profile__title',
-  profileDescription: '.profile__subtitle'
-}

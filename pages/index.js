@@ -25,8 +25,7 @@ import {
   popupDescription,
   closeImg,
   ESC_CODE,
-  submitButton,
-  profileSelectorData
+  submitButton
 } from '../utils/constants.js'
 
 
@@ -35,11 +34,6 @@ import {
 
 const popupWithImage = new PopupWithImage('.popup_big-picture');
 popupWithImage.setEventListeners();
-
-// function createUserCard(item, cardSelector) {
-//   const newCard = new Card(item, cardSelector, popupWithImage.open.bind(popupWithImage));
-//   return newCard.createCard();
-// }
 
 function createUserCard(item, cardSelector) {
   const newCard = new Card(item, cardSelector, () => {
@@ -59,78 +53,121 @@ cardsList.renderItems();
 
 
 
-// отправка попапа редактирования профиля
+// конфиг валидации
 
-// function addInfo() {
-//   nameInfo.textContent = nameInput.value;
-//   jobInfo.textContent = jobInput.value;
-// }
+const validationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit-button',
+  inputErrorClass: 'popup__field_error',
+  formError: '.popup__form-error',
+  formErrorActive: 'popup__form-error_active',
+  formLabel: '.popup__label'
+}
 
-// function handleUserInfoSubmit(evt) {
-//   evt.preventDefault();
-//   addInfo();
-//   closePopup(formEdit);
-// }
+const editFormValidator = new FormValidator(validationConfig, formEdit);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(validationConfig, formAdd);
+addFormValidator.enableValidation();
 
 
 
 // попап редактирование профиля
 
-const userInfo = new UserInfo({ profileName:'.profile__title', profileDescription: '.profile__subtitle'});
+const userInfo = new UserInfo({
+  profileNameSelector: '.profile__title',
+  profileDescriptionSelector: '.profile__subtitle'
+});
 
-const popupEdit = new PopupWithForm({ popupSelector:'.popup_profile-edit', handleSubmitForm: (values) => {
-  userInfo.setUserInfo({ name:values.Author, job: values.Profile })
+const popupEdit = new PopupWithForm({
+  popupSelector: '.popup_profile-edit',
+  handleSubmitForm: (inputValues) => {
+    userInfo.setUserInfo({ name: inputValues.name, description: inputValues.description });
+    popupEdit.close();
   }
 });
-popupEdit.setEventListeners();
 
+popupEdit.setEventListeners();
 
 editButton.addEventListener('click', () => {
   popupEdit.open();
-  const newUser = userInfo.getUserInfo()
-  nameInput.value = newUser.name;
-  jobInput.value = newUser.description;
-  editFormValidator.clearErrors();
+  editFormValidator.setSubmitToInitial();
+  nameInput.value = userInfo.getUserInfo().profileName;
+  jobInput.value = userInfo.getUserInfo().profileDescription;
 });
-
-
-
-
-
-
-// const newUser = new UserInfo({ profileName:'.profile__title', profileDescription: '.profile__subtitle' });
-
-// const popupEdit = new PopupWithForm({ formEdit, handleSubmitForm: (values) => {
-//   newUser.setUserInfo({ name:values.Author, job:values.Profile })
-// }
-// });
-// popupEdit.setEventListeners();
-
-
-
-
 
 
 
 // отправка попапа добавления карточки
 
-const popupAddCard = new PopupWithForm({ popupSelector:'.popup_new-place', handleSubmitForm: () => {
-  const addInputValues = popupAddCard._getInputValues();
-  const newCardDataSet = {
-    name: addInputValues.Name,
-    link: addInputValues.Link
+const popupAddCard = new PopupWithForm ({
+  popupSelector: '.popup_new-place', handleSubmitForm: (inputValues) => {
+    const makeCard = createUserCard({
+      name:inputValues.title, link:inputValues.link
+    }, '.template');
+    cardsList.addItem(makeCard);
+    popupAddCard.close();
   }
-  const card = new Card(newCardDataSet,'.template', () => {
-    popupWithImage.open(item.name, item.link)});
-  const cardElement = card.createCard();
-  photoContainerEl.prepend(cardElement);
-  popupAddCard.close();}
-});
+})
+
 popupAddCard.setEventListeners();
-addButton.addEventListener('click', () => {
+
+function handleAddCard () {
   popupAddCard.open();
-  addFormValidator.clearErrors();
+  addFormValidator.setSubmitToInitial();
+}
+
+addButton.addEventListener("click", handleAddCard);
+
+
+
+
+// закрытие по overlay
+
+formEdit.addEventListener('mousedown', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(formEdit);
+  }
 });
+
+formAdd.addEventListener('mousedown', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(formAdd);
+  }
+});
+
+popupBigPicture.addEventListener('mousedown', (event) => {
+  if (event.target === event.currentTarget) {
+    closePopup(popupBigPicture);
+  }
+});
+
+
+
+
+
+
+
+
+
+// const popupAddCard = new PopupWithForm({ popupSelector:'.popup_new-place', handleSubmitForm: () => {
+//   const addInputValues = popupAddCard._getInputValues();
+//   const newCardDataSet = {
+//     name: addInputValues.Name,
+//     link: addInputValues.Link
+//   }
+//   const card = new Card(newCardDataSet,'.template', () => {
+//     popupWithImage.open(item.name, item.link)});
+//   const cardElement = card.createCard();
+//   photoContainerEl.prepend(cardElement);
+//   popupAddCard.close();}
+// });
+// popupAddCard.setEventListeners();
+// addButton.addEventListener('click', () => {
+//   popupAddCard.open();
+//   addFormValidator.clearErrors();
+// });
 
 
 
@@ -158,46 +195,9 @@ addButton.addEventListener('click', () => {
 
 
 
-// закрытие по overlay
-
-formEdit.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(formEdit);
-  }
-});
-
-formAdd.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(formAdd);
-  }
-});
-
-popupBigPicture.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(popupBigPicture);
-  }
-});
 
 
 
-// кнофиг валидации
-
-const validationConfig = {
-  formSelector: '.popup__container',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit-button',
-  inputErrorClass: 'popup__field_error',
-  formError: '.popup__form-error',
-  formErrorActive: 'popup__form-error_active',
-  formLabel: '.popup__label'
-}
-
-
-const editFormValidator = new FormValidator(validationConfig, formEdit);
-editFormValidator.enableValidation();
-
-const addFormValidator = new FormValidator(validationConfig, formAdd);
-addFormValidator.enableValidation();
 
 
 
