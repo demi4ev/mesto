@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="default-back">
@@ -12,13 +12,13 @@
     <div class="page">
 
       <header class="header">
-        <a class="header__link" href="/" target="_self"><img class="header__logo" src="./images/mesto-logo.svg" alt="Логотип Mesto"></a>
+        <a class="header__link" href="/" target="_self"><img class="header__logo" src="<%=require('./images/mesto-logo.svg')%>" alt="Логотип Mesto"></a>
       </header>
 
       <main class="content">
 
         <section class="profile">
-          <img class="profile__image" src="./images/Jacques-Yves-Cousteau-photo_2x.jpg" alt="Фото Жак-Ив Кусто">
+          <img class="profile__image" src="<%=require('./images/Jacques-Yves-Cousteau-photo_2x.jpg')%>" alt="Фото Жак-Ив Кусто">
           <div class="profile__info">
             <div class="profile__name">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -64,7 +64,7 @@
               </label>
               <label class="popup__label">
                 <input type="url" id="link-image-input" class="popup__field popup__field_type_link-image"
-                name="link-image" placeholder="Ссылка на картинку" required>
+                name="link" placeholder="Ссылка на картинку" required>
                 <span id="link-image-input-error" class="popup__form-error"></span>
               </label>
             <button class="popup__submit-button popup__create-button" type="submit" disabled="true">Создать</button>
@@ -75,7 +75,7 @@
 
         <div class="popup popup_big-picture">
           <div class="popup__container popup__container_img">
-            <img class="popup__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Кам">
+            <img class="popup__img" src="#" alt="#">
             <p class="popup__description">Новое место</p>
             <button class="popup__close-button" type="reset"></button>
           </div>
@@ -101,7 +101,7 @@
   </template>
 
   <!-- <script src="./components/initial-сards.js"></script> -->
-  <script type="module" src="./pages/index.js"></script>
+  <!-- <script type="module" src="./pages/index.js"></script> -->
 
 </body>
 

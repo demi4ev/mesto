@@ -22,7 +22,7 @@ export default class Card {
 
   // создаём карточку
 
-  createCard() {
+  generateCard() {
     this._newItem = this._getTemplate();
     this._imgButton = this._newItem.querySelector('.photo-items__img-button');
     this._likeButton = this._newItem.querySelector('.photo-items__like-button');
@@ -39,20 +39,18 @@ export default class Card {
     this._delButton.addEventListener('click', () => {
       this._delCard()
     })
-    this._delButton.addEventListener('click', this._delCard)
-    this._likeButton.addEventListener('click', this._likeCard)
-    // this._imgButton.addEventListener('click', () => {
-    //   this._handleCardClick(this._name, this._link)
-    // })
+    this._likeButton.addEventListener('click', () => {
+      this._likeCard()
+    })
     this._imgEl.addEventListener('click', this._handleCardClick);
   }
 
-  _delCard = () => {
+  _delCard() {
     this._newItem.remove()
   }
 
-  _likeCard = () => {
-    this._newItem.querySelector('.photo-items__like-button').classList.toggle('photo-items__like-button_active')
+  _likeCard() {
+    this._likeButton.classList.toggle('photo-items__like-button_active')
   }
 
 

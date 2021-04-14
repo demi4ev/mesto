@@ -5,11 +5,6 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    // this._userInfo = {
-    //   profileName: this._profileName.textContent,
-    //   profileDescription: this._profileDescription.textContent
-    // };
-    // return this._userInfo;
     return {
       profileName: this._profileName.textContent,
       profileDescription: this._profileDescription.textContent
@@ -21,17 +16,3 @@ export default class UserInfo {
     this._profileDescription.textContent = description;
   }
 }
-
-
-// function handleUserInfoSubmit(evt) {
-//   evt.preventDefault();
-//   addInfo();
-//   closePopup(formEdit);
-// }
-
-// function showPopupEdit() {
-//   openPopup(formEdit);
-//   nameInput.value = nameInfo.textContent;
-//   jobInput.value = jobInfo.textContent;
-//   editFormValidator.clearErrors();
-// }

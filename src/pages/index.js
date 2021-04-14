@@ -1,3 +1,4 @@
+import './index.css'
 import Card from '../components/Сard.js'
 import { FormValidator } from '../components/FormValidator.js'
 import Section from '../components/Section.js'
@@ -35,16 +36,16 @@ import {
 const popupWithImage = new PopupWithImage('.popup_big-picture');
 popupWithImage.setEventListeners();
 
-function createUserCard(item, cardSelector) {
+function createCard(item, cardSelector) {
   const newCard = new Card(item, cardSelector, () => {
     popupWithImage.open(item.name, item.link)});
-  return newCard.createCard();
+  return newCard.generateCard();
 }
 
 const cardsList = new Section({
   items: initialCards,
   renderer: item => {
-    const makeCard = createUserCard(item, '.template');
+    const makeCard = createCard(item, '.template');
     cardsList.addItem(makeCard, true);
   }
 },'.photo-items');
@@ -92,19 +93,19 @@ popupEdit.setEventListeners();
 
 editButton.addEventListener('click', () => {
   popupEdit.open();
-  editFormValidator.setSubmitToInitial();
+  editFormValidator.setSubmit();
   nameInput.value = userInfo.getUserInfo().profileName;
   jobInput.value = userInfo.getUserInfo().profileDescription;
 });
-
 
 
 // отправка попапа добавления карточки
 
 const popupAddCard = new PopupWithForm ({
   popupSelector: '.popup_new-place', handleSubmitForm: (inputValues) => {
-    const makeCard = createUserCard({
-      name:inputValues.title, link:inputValues.link
+    const makeCard = createCard({
+      name: inputValues.title,
+      link: inputValues.link
     }, '.template');
     cardsList.addItem(makeCard);
     popupAddCard.close();
@@ -115,33 +116,15 @@ popupAddCard.setEventListeners();
 
 function handleAddCard () {
   popupAddCard.open();
-  addFormValidator.setSubmitToInitial();
+  addFormValidator.setSubmit();
 }
 
-addButton.addEventListener("click", handleAddCard);
+addButton.addEventListener('click', handleAddCard);
 
 
 
 
-// закрытие по overlay
 
-formEdit.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(formEdit);
-  }
-});
-
-formAdd.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(formAdd);
-  }
-});
-
-popupBigPicture.addEventListener('mousedown', (event) => {
-  if (event.target === event.currentTarget) {
-    closePopup(popupBigPicture);
-  }
-});
 
 
 
@@ -159,7 +142,7 @@ popupBigPicture.addEventListener('mousedown', (event) => {
 //   }
 //   const card = new Card(newCardDataSet,'.template', () => {
 //     popupWithImage.open(item.name, item.link)});
-//   const cardElement = card.createCard();
+//   const cardElement = card.generateCard();
 //   photoContainerEl.prepend(cardElement);
 //   popupAddCard.close();}
 // });
@@ -175,7 +158,7 @@ popupBigPicture.addEventListener('mousedown', (event) => {
 // function handleAddCardSubmit(evt) {
 //   evt.preventDefault();
 //   const newCard = new Card({name:titleInput.value, link:imgLinkInput.value},'.template', popupBigPicture);
-//   photoContainerEl.prepend(newCard.createCard());
+//   photoContainerEl.prepend(newCard.generateCard());
 //   titleInput.value = '';
 //   imgLinkInput.value = '';
 //   closePopup(formAdd);
@@ -265,7 +248,7 @@ popupBigPicture.addEventListener('mousedown', (event) => {
 // function addCard() {
 //   const titleInfo = titleInput.value;
 //   const imgLinkInfo = imgLinkInput.value;
-//   const cardItem = createCard({name: titleInfo, link: imgLinkInfo});
+//   const cardItem = generateCard({name: titleInfo, link: imgLinkInfo});
 //   photoContainerEl.prepend(cardItem);
 //   titleInput.value = '';
 //   imgLinkInput.value = '';
