@@ -107,4 +107,3 @@ function handleAddCard () {
 }
 
 addButton.addEventListener('click', handleAddCard);
-
