@@ -80,7 +80,7 @@ popupEdit.setEventListeners();
 
 editButton.addEventListener('click', () => {
   popupEdit.open();
-  editFormValidator.setSubmit();
+  editFormValidator.clearErrors();
   nameInput.value = userInfo.getUserInfo().profileName;
   jobInput.value = userInfo.getUserInfo().profileDescription;
 });
@@ -103,7 +103,7 @@ popupAddCard.setEventListeners();
 
 function handleAddCard () {
   popupAddCard.open();
-  addFormValidator.setSubmit();
+  addFormValidator.clearErrors();
 }
 
 addButton.addEventListener('click', handleAddCard);

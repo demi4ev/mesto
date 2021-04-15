@@ -30,9 +30,8 @@ export default class Popup {
   // закрытие по overlay
 
   _handleOverlayClose(evt) {
-    if (evt.target !== this._popup) return;  {
-      this.close();
-    }
+    if (evt.target !== this._popup) return;
+    this.close();
   }
 
   setEventListeners() {

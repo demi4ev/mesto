@@ -52,41 +52,4 @@ export default class Card {
   _likeCard() {
     this._likeButton.classList.toggle('photo-items__like-button_active')
   }
-
-
-  // _openImage = () => {
-  //   popupImg.src = this._link;
-  //   popupImg.alt = this._name;
-  //   popupDescription.textContent = this._name;
-  //   openPopup(popupBigPicture);
-  // }
 }
-
-// const popupBigPicture = document.querySelector('.popup_big-picture');
-// const popupImg = document.querySelector('.popup__img');
-// const popupDescription = document.querySelector('.popup__description');
-// const closeImg = popupBigPicture.querySelector('.popup__close-button');
-
-// const ESC_CODE = "Escape";
-
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener('keydown', closeByEsc);
-// }
-
-// // закрытие попапа
-
-// function closePopup(popup) {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closeByEsc);
-// }
-
-
-// // закрытие по esc
-
-// function closeByEsc(evt) {
-//   if (evt.key === ESC_CODE) {
-//     const openedPopup = document.querySelector('.popup_opened');
-//     closePopup(openedPopup);
-//   }
-// };
