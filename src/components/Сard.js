@@ -10,7 +10,6 @@ export default class Card {
     this._cardId = data._id;
     this._cardOwnerId = data.owner._id;
     this._currentUserId = currentUserId;
-    console.log('this._currentUserId', this._currentUserId)
     this._deleteSubmitCard = deleteSubmitCard;
     this._toggleLike = toggleLike;
     this._removeLike = removeLike;
