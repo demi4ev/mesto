@@ -29,7 +29,7 @@ export default class Api {
 
   // добавление карточки
 
-  addCard(name, link) {
+  addCard(data) {
     return fetch(`${this._address}/cards`, {
       method: 'POST',
       headers: {
@@ -37,8 +37,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: name,
-        link: link
+        name: data.name,
+        link: data.link
       })
     })
     .then(this._checkResponseData)

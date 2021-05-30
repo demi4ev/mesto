@@ -37,8 +37,10 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     const cardsList = new Section({
       items: cards,
       renderer: (item) => {
-        const makeCard = createCard(item, '.template');
-        cardsList.addItem(makeCard, true);
+        const card = createCard(item, '.template');
+        const cardElement = card.generateCard();
+        // const cardElement = createCard(item, '.template');
+        cardsList.addItem(cardElement);
       }
     },'.photo-items');
     cardsList.renderItems();
@@ -46,6 +48,7 @@ Promise.all([api.getUserData(), api.getInitialCards()])
   .catch((err) => {
     console.log(err)
   })
+
 
 
 // рендер карточек
@@ -61,26 +64,26 @@ popupWithImage.setEventListeners();
 //   return newCard.generateCard();
 // }
 
+let cardList
 
-function createCard(item, cardSelector) {
-  const newCard = new Card(item, cardSelector, () => {
+function createCard(item) {
+  const card = new Card(item, '.template', () => {
     popupWithImage.open(item.name, item.link)}, myUserData, () => {
       popupDeleteCard.open();
       popupDeleteCard.setSubmitAction(() => {
         api.removeCard(item._id)
         .then(() => {
-          newCard.deleteCard();
+          card.delCard();
           popupDeleteCard.close();
           })
         .catch((err) => {
           console.log(err);
         })
       });
-
     }, () => {
       api.setLike(item._id)
       .then((res) => {
-        newCard.handleLikes(res);
+        card.renderLikes(res);
       })
       .catch((err) => {
         console.log(err);
@@ -88,13 +91,13 @@ function createCard(item, cardSelector) {
     }, () => {
       api.removeLike(item._id)
       .then((res) => {
-        newCard.handleLikes(res);
+        card.renderLikes(res);
       })
       .catch((err) => {
         console.log(err);
       });
     });
-  return newCard.generateCard();
+  return card
 }
 
 
@@ -215,13 +218,16 @@ avatarEditButton.addEventListener('click', () => {
 
 const popupAddCard = new PopupWithForm ({
   popupSelector: '.popup_new-place',
-  handleSubmitForm: (name, link) => {
+  handleSubmitForm: (data) => {
     popupAddCard.renderLoading(true);
-    api.addCard(name, link)
+    const newCardDataSet = {
+      name: data.title,
+      link: data.link
+    }
+    api.addCard(newCardDataSet)
     .then((newCard) => {
       const card = createCard(newCard);
       const cardElement = card.generateCard();
-      // const makeCard = createCard({name: inputValues.title, link: inputValues.link})
       cardList.addItem(cardElement)
       popupAddCard.close()
     })
@@ -248,7 +254,7 @@ addButton.addEventListener('click', handleAddCard);
 
 const popupDeleteCard = new PopupDeleteCard ({
   popupSelector: '.popup_delete-card',
-  handleSubmitCallback: (item) => {
+  handleSubmitForm: (item) => {
     api.removeCard(item._id)
     .then(() => {
       card.delCard();

@@ -9,7 +9,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._cardId = data._id;
     this._userId = userId;
-    this._ownerId = data.owner._id;
+    this._cardOwnerId = data.owner._id;
     this._deleteSubmitCard = deleteSubmitCard;
     this._toggleLike = toggleLike;
     this._removeLike = removeLike;
@@ -40,7 +40,7 @@ export default class Card {
   _setLike() {
     this._likeCounter = this._newItem.querySelector('.photo-items__like-counter');
     this._setLikesCount(this._likes);
-    this._updateLikes();
+    this._updateLikeView();
   }
 
   _setLikesCount(likesCount) {
@@ -56,15 +56,20 @@ export default class Card {
     this._likeButton = this._newItem.querySelector('.photo-items__like-button');
     this._delButton = this._newItem.querySelector('.photo-items__del-button');
     this._newItem.querySelector('.photo-items__title').textContent = this._name;
+    this._likesCounter = this._newItem.querySelector('.photo-items__like-counter');
     this._imgEl = this._newItem.querySelector('.photo-items__image');
     this._imgEl.src = this._link;
     this._imgEl.alt = this._name;
+    if (this._cardOwnerId == this._userId) {
+      this._delButton.classList.add('popup_opened');
+    }
     this._setLike();
     // if (this._ownerID !== this._userID) {
     //   this._delButton.style.display = 'none'
     // }
     this._addDelButton();
     this._setEventListeners();
+
     return this._newItem;
   }
 
@@ -72,13 +77,13 @@ export default class Card {
   // добавляем кнопку удаления
 
   _addDelButton() {
-    if (this._isOwner()) {
+    if (this._isCardOwner()) {
       this._delButton.classList.add('popup_opened');
     }
   }
 
-  _isOwner() {
-    if (this._ownerId === this._userId);
+  _isCardOwner() {
+    if (this._cardOwnerId === this._userId);
   }
 
   _setEventListeners() {
@@ -104,21 +109,21 @@ export default class Card {
     this._newItem = null;
   }
 
-  _likeCard() {
-    this._likeButton.classList.toggle('photo-items__like-button_active')
-  }
+  // _likeCard() {
+  //   this._likeButton.classList.toggle('photo-items__like-button_active')
+  // }
 
   handleLikes(data) {
     this._myLike = data.likes;
     this._setLikesCount(this._myLike.length);
-    this._updateLikes();
+    this._updateLikeView();
   }
 
   _checkLikeId() {
-    return this._myLike.find(item => item._id === this._userId)
+    return this._myLike.find(el => el._id === this._userId)
   }
 
-  _updateLikes() {
+  _updateLikeView() {
     if (this._checkLikeId()) {
       this._likeButton.classList.add('photo-items__like-button_active');
     }
