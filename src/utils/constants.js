@@ -37,6 +37,7 @@ const titlePlaceInput = document.querySelector('popup__field_type_title');
 const imagePlaceInput = document.querySelector('popup__field_type_link-image');
 const addButton = document.querySelector('.profile__add-button');
 const ESC_CODE = 'Escape';
+const currentUserId = '7a3985f26f5217afcd3b1d22';
 
 export {
   initialCards,
@@ -51,5 +52,6 @@ export {
   titlePlaceInput,
   imagePlaceInput,
   addButton,
-  ESC_CODE
+  ESC_CODE,
+  currentUserId
 };

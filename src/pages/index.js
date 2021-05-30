@@ -19,7 +19,8 @@ import {
   titlePlaceInput,
   imagePlaceInput,
   addButton,
-  ESC_CODE
+  ESC_CODE,
+  currentUserId
 } from '../utils/constants.js'
 import Api from '../components/Api.js'
 
@@ -28,12 +29,18 @@ const api = new Api ({
   token: 'bc0f3231-b10d-4903-b46b-c2341808b6fc'
 })
 
-let myUserData
+
+
+// api.getUserData()
+// .then((res) => {
+//   const currentUserId= res._id;
+//   console.log(currentUserId)
+// })
 
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([data, cards]) => {
     userInfo.setUserInfo(data);
-    myUserData = userInfo._id;
+    // currentUserId = userInfo._id;
     const cardsList = new Section({
       items: cards,
       renderer: (item) => {
@@ -68,7 +75,7 @@ let cardList
 
 function createCard(item) {
   const card = new Card(item, '.template', () => {
-    popupWithImage.open(item.name, item.link)}, myUserData, () => {
+    popupWithImage.open(item.name, item.link)}, currentUserId, () => {
       popupDeleteCard.open();
       popupDeleteCard.setSubmitAction(() => {
         api.removeCard(item._id)

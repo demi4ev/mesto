@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick, userId, deleteSubmitCard, toggleLike, removeLike) {
+  constructor(data, cardSelector, handleCardClick, currentUserId, deleteSubmitCard, toggleLike, removeLike) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
@@ -8,8 +8,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._cardId = data._id;
-    this._userId = userId;
     this._cardOwnerId = data.owner._id;
+    this._currentUserId = currentUserId;
+    console.log('this._currentUserId', this._currentUserId)
     this._deleteSubmitCard = deleteSubmitCard;
     this._toggleLike = toggleLike;
     this._removeLike = removeLike;
@@ -60,11 +61,11 @@ export default class Card {
     this._imgEl = this._newItem.querySelector('.photo-items__image');
     this._imgEl.src = this._link;
     this._imgEl.alt = this._name;
-    if (this._cardOwnerId !== this._userId) {
+    if (this._cardOwnerId === this._currentUserId) {
       this._delButton.classList.add('popup_opened');
     }
     this._setLike();
-    this._addDelButton();
+    // this._addDelButton();
     this._setEventListeners();
 
     return this._newItem;
@@ -73,15 +74,15 @@ export default class Card {
 
   // добавляем кнопку удаления
 
-  _addDelButton() {
-    if (this._isCardOwner()) {
-      this._delButton.classList.add('popup_opened');
-    }
-  }
+  // _addDelButton() {
+  //   if (this._isCardOwner()) {
+  //     this._delButton.classList.add('popup_opened');
+  //   }
+  // }
 
-  _isCardOwner() {
-    if (this._cardOwnerId === this._userId);
-  }
+  // _isCardOwner() {
+  //   if (this._cardOwnerId === this._userId);
+  // }
 
   _setEventListeners() {
     this._delButton.addEventListener('click', () => {
@@ -117,7 +118,7 @@ export default class Card {
   }
 
   _checkLikeId() {
-    return this._myLike.find(el => el._id === this._userId)
+    return this._myLike.find(el => el._id === this._currentUserId)
   }
 
   _updateLikeView() {
