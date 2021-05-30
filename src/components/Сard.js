@@ -64,9 +64,6 @@ export default class Card {
       this._delButton.classList.add('popup_opened');
     }
     this._setLike();
-    // if (this._ownerID !== this._userID) {
-    //   this._delButton.style.display = 'none'
-    // }
     this._addDelButton();
     this._setEventListeners();
 
