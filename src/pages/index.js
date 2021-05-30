@@ -90,7 +90,7 @@ function createCard(item) {
     }, () => {
       api.setLike(item._id)
       .then((res) => {
-        card.handleLikes(res);
+        card.addLikes(res);
       })
       .catch((err) => {
         console.log(err);
@@ -98,7 +98,7 @@ function createCard(item) {
     }, () => {
       api.removeLike(item._id)
       .then((res) => {
-        card.handleLikes(res);
+        card.addLikes(res);
       })
       .catch((err) => {
         console.log(err);

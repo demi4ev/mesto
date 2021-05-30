@@ -27,20 +27,10 @@ export default class Card {
     return cardElement;
   }
 
-  // _getTemplate() {
-  //   const elementTemplate = document.querySelector(this._cardSelector).content
-  //   const cardElement = elementTemplate
-  //   .querySelector('.photo-items__post')
-  //   .cloneNode(true);
-  //   return cardElement;
-  // }
-
-
-
   _setLike() {
     this._likeCounter = this._newItem.querySelector('.photo-items__like-counter');
     this._setLikesCount(this._likes);
-    this._updateLikeView();
+    this._updateLikes();
   }
 
   _setLikesCount(likesCount) {
@@ -64,33 +54,14 @@ export default class Card {
       this._delButton.classList.add('popup_opened');
     }
     this._setLike();
-    // this._addDelButton();
     this._setEventListeners();
-
     return this._newItem;
   }
 
-
-  // добавляем кнопку удаления
-
-  // _addDelButton() {
-  //   if (this._isCardOwner()) {
-  //     this._delButton.classList.add('popup_opened');
-  //   }
-  // }
-
-  // _isCardOwner() {
-  //   if (this._cardOwnerId === this._userId);
-  // }
-
   _setEventListeners() {
     this._delButton.addEventListener('click', () => {
-      // this._delCard()
       this._deleteSubmitCard(this._cardId)
     })
-    // this._likeButton.addEventListener('click', () => {
-    //   this._likeCard()
-    // })
     this._likeButton.addEventListener('click', () => {
       if (this._checkLikeId()) {
         this._removeLike()
@@ -106,21 +77,17 @@ export default class Card {
     this._newItem = null;
   }
 
-  // _likeCard() {
-  //   this._likeButton.classList.toggle('photo-items__like-button_active')
-  // }
-
-  handleLikes(data) {
+  addLikes(data) {
     this._myLike = data.likes;
     this._setLikesCount(this._myLike.length);
-    this._updateLikeView();
+    this._updateLikes();
   }
 
   _checkLikeId() {
     return this._myLike.find(el => el._id === this._currentUserId)
   }
 
-  _updateLikeView() {
+  _updateLikes() {
     if (this._checkLikeId()) {
       this._likeButton.classList.add('photo-items__like-button_active');
     }
