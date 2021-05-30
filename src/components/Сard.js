@@ -60,7 +60,7 @@ export default class Card {
     this._imgEl = this._newItem.querySelector('.photo-items__image');
     this._imgEl.src = this._link;
     this._imgEl.alt = this._name;
-    if (this._cardOwnerId == this._userId) {
+    if (this._cardOwnerId !== this._userId) {
       this._delButton.classList.add('popup_opened');
     }
     this._setLike();
