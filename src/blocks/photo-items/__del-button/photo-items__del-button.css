@@ -1,4 +1,6 @@
 .photo-items__del-button {
+  visibility: hidden;
+  opacity: 0;
   padding: 0;
   border: none;
   font: inherit;

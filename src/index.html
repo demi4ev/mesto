@@ -7,6 +7,7 @@
   <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
+
 <body class="default-back">
 
     <div class="page">
@@ -18,7 +19,10 @@
       <main class="content">
 
         <section class="profile">
-          <img class="profile__image" src="<%=require('./images/Jacques-Yves-Cousteau-photo_2x.jpg')%>" alt="Фото Жак-Ив Кусто">
+          <div class="profile__avatar">
+            <img class="profile__avatar-image" src="<%=require('./images/Jacques-Yves-Cousteau-photo_2x.jpg')%>" alt="Фото Жак-Ив Кусто">
+            <button type="button" class="profile__avatar-edit-button"></button>
+          </div>
           <div class="profile__info">
             <div class="profile__name">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -81,6 +85,29 @@
           </div>
         </div>
 
+        <div class="popup popup_delete-card">
+          <form class="popup__container" name="popup_delete-card" novalidate>
+            <h2 class="popup__title popup__title_question">Вы уверены?</h2>
+            <button class="popup__submit-button" type="submit">Да</button>
+            <button class="popup__close-button" type="reset"></button>
+          </form>
+        </div>
+
+        <div class="popup popup_new-avatar">
+          <form class="popup__container" name="popup_new-avatar" novalidate>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <fieldset class="popup__form-fields">
+              <label class="popup__label">
+                <input type="url" id="link-image-input" class="popup__field popup__field_type_link-avatar-image"
+                name="link" placeholder="Ссылка на новый аватар" required>
+                <span id="link-image-input-error" class="popup__form-error"></span>
+              </label>
+            <button class="popup__submit-button popup__create-button" type="submit" disabled="true">Сохранить</button>
+            </fieldset>
+            <button class="popup__close-button" type="reset"></button>
+          </form>
+        </div>
+
       </main>
 
       <footer class="footer">
@@ -95,13 +122,14 @@
       <button type="button" class="photo-items__img-button"><img class="photo-items__image" src="${item.link}" alt="${item.name}"></button>
       <div class="photo-items__description">
         <h2 class="photo-items__title">${item.name}</h2>
-        <button type="button" class="photo-items__like-button"></button>
+        <div class="photo-items__like-container">
+          <button type="button" class="photo-items__like-button"></button>
+          <p class="photo-items__like-counter">0</p>
+        </div>
       </div>
       </article>
   </template>
 
-  <!-- <script src="./components/initial-сards.js"></script> -->
-  <!-- <script type="module" src="./pages/index.js"></script> -->
 
 </body>
 
