@@ -37,41 +37,53 @@ const api = new Api ({
 //   console.log(currentUserId)
 // })
 
-Promise.all([api.getUserData(), api.getInitialCards()])
-  .then(([data, cards]) => {
+Promise.all([api.getInitialCards(), api.getUserData()])
+  .then(([cards, data]) => {
     userInfo.setUserInfo(data);
     // currentUserId = userInfo._id;
     const cardsList = new Section({
       items: cards,
       renderer: (item) => {
-        const card = createCard(item, '.template');
+        const card = createCard(item);
         const cardElement = card.generateCard();
         // const cardElement = createCard(item, '.template');
-        cardsList.addItem(cardElement);
+        cardsList.addItem(cardElement, true);
       }
     },'.photo-items');
     cardsList.renderItems();
+
+
+    const popupAddCard = new PopupWithForm ({
+      popupSelector: '.popup_new-place',
+      handleSubmitForm: (inputValues) => {
+        popupAddCard.renderLoading(true);
+        api.addCard(inputValues.title, inputValues.link)
+        .then((newCard) => {
+          const card = createCard(newCard);
+          const cardElement = card.generateCard();
+          cardsList.addItem(cardElement)
+          popupAddCard.close()
+        })
+      },
+    })
+    popupAddCard.setEventListeners();
+
+    function handleAddCard () {
+      popupAddCard.open();
+      addFormValidator.clearErrors();
+    }
+
+    addButton.addEventListener('click', handleAddCard);
   })
+
   .catch((err) => {
     console.log(err)
   })
 
 
-
-// рендер карточек
-
-
-
 const popupWithImage = new PopupWithImage('.popup_big-picture');
 popupWithImage.setEventListeners();
 
-// function createCard(item, cardSelector) {
-//   const newCard = new Card(item, cardSelector, () => {
-//     popupWithImage.open(item.name, item.link)});
-//   return newCard.generateCard();
-// }
-
-let cardList
 
 function createCard(item) {
   const card = new Card(item, '.template', () => {
@@ -195,66 +207,6 @@ avatarEditButton.addEventListener('click', () => {
   popupAddAvatar.open();
   addAvatarFormValidator.clearErrors();
 })
-
-
-// отправка попапа добавления карточки
-
-// const popupAddCard = new PopupWithForm ({
-//   popupSelector: '.popup_new-place',
-//   handleSubmitForm: (inputValues) => {
-//     const makeCard = createCard({
-//       name: inputValues.title,
-//       link: inputValues.link
-//     }, '.template');
-//     cardsList.addItem(makeCard);
-//     popupAddCard.close();
-//   }
-// })
-
-// popupAddCard.setEventListeners();
-
-// function handleAddCard () {
-//   popupAddCard.open();
-//   addFormValidator.clearErrors();
-// }
-
-// addButton.addEventListener('click', handleAddCard);
-
-
-// отправка попапа добавления карточки
-
-const popupAddCard = new PopupWithForm ({
-  popupSelector: '.popup_new-place',
-  handleSubmitForm: (data) => {
-    popupAddCard.renderLoading(true);
-    const newCardDataSet = {
-      name: data.title,
-      link: data.link
-    }
-    api.addCard(newCardDataSet)
-    .then((newCard) => {
-      const card = createCard(newCard);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement)
-      popupAddCard.close()
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      popupAddCard.renderLoading(false);
-    })
-  },
-})
-
-popupAddCard.setEventListeners();
-
-function handleAddCard () {
-  popupAddCard.open();
-  addFormValidator.clearErrors();
-}
-
-addButton.addEventListener('click', handleAddCard);
 
 
 // попап удаления карточки

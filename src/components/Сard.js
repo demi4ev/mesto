@@ -3,8 +3,8 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
-    this._likes = data.likes.length;
     this._myLike = data.likes;
+    this._likes = data.likes.length;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._cardId = data._id;

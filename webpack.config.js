@@ -15,6 +15,8 @@ module.exports = {
     assetModuleFilename: 'images/[name][ext]'
   },
 
+  devtool: 'cheap-module-source-map',
+
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
