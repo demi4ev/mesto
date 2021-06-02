@@ -14,7 +14,7 @@ export default class PopupDeleteCard extends Popup {
 
   // прелоадер кнопки
 
-  renderLoading(isLoading, loadingText = 'Сохранение...') {
+  renderLoading(isLoading, loadingText = 'Удаление...') {
     if (isLoading) {
       this._formButton.textContent = loadingText;
     } else {
