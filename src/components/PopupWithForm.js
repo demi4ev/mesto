@@ -35,9 +35,9 @@ export default class PopupWithForm extends Popup {
 
   // прелоадер кнопки
 
-  renderLoading(isLoading) {
+  renderLoading(isLoading, loadingText = 'Сохранение...') {
     if (isLoading) {
-      this._formButton.textContent = 'Сохранение...';
+      this._formButton.textContent = loadingText;
     } else {
       this._formButton.textContent = this._defaultFormButtonText;
     }

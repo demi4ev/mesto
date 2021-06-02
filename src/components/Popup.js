@@ -1,10 +1,7 @@
-import { ESC_CODE } from '../utils/constants.js'
-
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._handleOverlayClose = this._handleOverlayClose.bind(this);
   }
 
   open() {
@@ -21,18 +18,11 @@ export default class Popup {
   // закрытие по esc
 
   _handleEscClose(evt) {
-    if (evt.key === ESC_CODE) {
+    if (evt.key === 'Escape') {
       this.close();
     }
   }
 
-
-  // закрытие по overlay
-
-  _handleOverlayClose(evt) {
-    if (evt.target !== this._popup) return;
-    this.close();
-  }
 
   setEventListeners() {
     this._popup.addEventListener('click', (evt) => {

@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick, currentUserId, deleteSubmitCard, toggleLike, removeLike) {
+  constructor(data, cardSelector, handleCardClick, userId, deleteSubmitCard, toggleLike, removeLike) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
@@ -9,7 +9,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._cardId = data._id;
     this._cardOwnerId = data.owner._id;
-    this._currentUserId = currentUserId;
+    this._userId = userId;
     this._deleteSubmitCard = deleteSubmitCard;
     this._toggleLike = toggleLike;
     this._removeLike = removeLike;
@@ -50,7 +50,7 @@ export default class Card {
     this._imgEl = this._newItem.querySelector('.photo-items__image');
     this._imgEl.src = this._link;
     this._imgEl.alt = this._name;
-    if (this._cardOwnerId === this._currentUserId) {
+    if (this._cardOwnerId === this._userId) {
       this._delButton.classList.add('popup_opened');
     }
     this._setLike();
@@ -84,7 +84,7 @@ export default class Card {
   }
 
   _checkLikeId() {
-    return this._myLike.find(el => el._id === this._currentUserId)
+    return this._myLike.find(el => el._id === this._userId)
   }
 
   _updateLikes() {

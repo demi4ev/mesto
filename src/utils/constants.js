@@ -36,8 +36,16 @@ const editButton = document.querySelector('.profile__edit-button');
 const titlePlaceInput = document.querySelector('popup__field_type_title');
 const imagePlaceInput = document.querySelector('popup__field_type_link-image');
 const addButton = document.querySelector('.profile__add-button');
-const ESC_CODE = 'Escape';
-const currentUserId = '7a3985f26f5217afcd3b1d22';
+
+const validationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit-button',
+  inputErrorClass: 'popup__field_error',
+  formError: '.popup__form-error',
+  formErrorActive: 'popup__form-error_active',
+  formLabel: '.popup__label'
+}
 
 export {
   initialCards,
@@ -52,6 +60,5 @@ export {
   titlePlaceInput,
   imagePlaceInput,
   addButton,
-  ESC_CODE,
-  currentUserId
+  validationConfig
 };
